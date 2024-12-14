@@ -88,22 +88,32 @@ def process_csv_and_generate_audio(csv_file):
             text = row[1].strip()
             mp3_filename = os.path.join(OUTPUT_DIR, f"{base_filename}.mp3")
 
+            # Skip if the file already exists
+            if os.path.exists(mp3_filename):
+                print(f"Skipping {base_filename}, file already exists.")
+                continue
+
             print(f"Generating audio for: {base_filename} with text: {text}")
 
-            # Generate speech using ElevenLabs API
-            audio_generator = client.text_to_speech.convert(
-                voice_id=VOICE_ID,
-                model_id="eleven_multilingual_v2",
-                text=text,
-                output_format=MP3_OUTPUT_FORMAT,
-            )
+            try:
+                # Generate speech using ElevenLabs API
+                audio_generator = client.text_to_speech.convert(
+                    voice_id=VOICE_ID,
+                    model_id="eleven_multilingual_v2",
+                    text=text,
+                    output_format=MP3_OUTPUT_FORMAT,
+                )
 
-            # Consume generator and write audio as bytes
-            with open(mp3_filename, "wb") as audio_file:
-                for chunk in audio_generator:
-                    audio_file.write(chunk)
+                # Consume generator and write audio as bytes
+                with open(mp3_filename, "wb") as audio_file:
+                    for chunk in audio_generator:
+                        audio_file.write(chunk)
 
-            print(f"MP3 saved to: {mp3_filename}")
+                print(f"MP3 saved to: {mp3_filename}")
+
+            except Exception as e:
+                print(f"Error generating audio for {base_filename}: {e}")
+                continue
 
 
 def find_csv_files():
