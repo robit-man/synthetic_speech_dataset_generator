@@ -1,17 +1,17 @@
 # Elevenlabs Synthetic Dataset Generator
 
-### Place this python file in a directory alongside a metadata.csv file
+### Place the generate.py and convert.py files in a directory alongside a metadata.csv file
 the metadata.csv MUST contain only a single pipe per line
 ```csv
 file_name|text content in the file
 ```
 
-Then run the generator python script
+### Then run the generator python script
 ```
 python3 generate.py
 ```
 
-Now you can convert the output mp3 files to wav
+### Now you can convert the output mp3 files to wav
 ```
 python3 convert.py
 ```
