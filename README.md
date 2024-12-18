@@ -22,3 +22,5 @@ The script creates a venv, installs deps, activates venv, creates an output dire
 clone this repo, and add your Elevenlabs API key and desired voice id, and test with the included numbers.csv.
 
 The script will automatically pick up where it left off in the csv given a failure mode when you re-start the script.
+
+## Train on this dataset using this [conditioned version of piper](https://github.com/robit-man/piper-train-jetson/tree/master) for jetson platforms
